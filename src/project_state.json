@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Website that opens and plays shared video links.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Minimal play-button icon on transparent background (play-icon.dim_128x128.png)\n- Abstract video/film themed hero illustration with warm neutral palette (video-hero.dim_1600x900.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-a-single-page-ui-where-a-user-can-paste-a-shared-video-link-url-and-open-it-in-an-in-page-player",
+      "title": "Create a single-page UI where a user can paste a shared video link (URL) and open it in an in-page player.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-support-playing-common-types-of-shared-video-links-1-direct-video-file-urls-e-g-mp4-webm-ogg-via-an-html5-video-player-and-2-embeddable-hosted-video-pages-e-g-youtube-vimeo-style-links-via-a-safe-iframe-embed-fallback",
+      "title": "Support playing common types of shared video links: (1) direct video file URLs (e.g., .mp4/.webm/.ogg) via an HTML5 <video> player, and (2) embeddable hosted video pages (e.g., YouTube/Vimeo-style links) via a safe iframe embed fallback.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-enable-shareable-playback-via-url-encode-the-target-video-link-into-the-browser-url-query-param-or-route-segment-so-that-opening-a-shared-app-link-loads-the-same-video-automatically",
+      "title": "Enable shareable playback via URL: encode the target video link into the browser URL (query param or route segment) so that opening a shared app link loads the same video automatically.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-coherent-visual-theme-colors-typography-spacing-and-component-styling-and-apply-it-consistently-across-the-landing-input-view-and-the-player-view-avoid-a-blue-purple-primary-palette",
+      "title": "Add a coherent visual theme (colors, typography, spacing, and component styling) and apply it consistently across the landing input view and the player view. Avoid a blue/purple primary palette.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-image-assets-and-use-them-in-the-ui-stored-under-frontend-public-assets-generated",
+      "title": "Add generated static image assets and use them in the UI (stored under frontend/public/assets/generated).",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Build a website that can open and play shared video links.",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Website to open and play shared video links",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

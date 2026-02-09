@@ -1,0 +1,108 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-single-page-ui-where-a-user-can-paste-a-shared-video-link-url-and-open-it-in-an-in-page-player",
+      "featureTitle": "Create a single-page UI where a user can paste a shared video link (URL) and open it in an in-page player.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/PlayerView.tsx",
+        "frontend/src/components/VideoLinkForm.tsx",
+        "frontend/src/components/VideoRenderer.tsx",
+        "frontend/src/lib/validation.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-support-playing-common-types-of-shared-video-links-1-direct-video-file-urls-e-g-mp4-webm-ogg-via-an-html5-video-player-and-2-embeddable-hosted-video-pages-e-g-youtube-vimeo-style-links-via-a-safe-iframe-embed-fallback",
+      "featureTitle": "Support playing common types of shared video links: (1) direct video file URLs (e.g., .mp4/.webm/.ogg) via an HTML5 <video> player, and (2) embeddable hosted video pages (e.g., YouTube/Vimeo-style links) via a safe iframe embed fallback.",
+      "files": [
+        "frontend/src/components/EmbedFallback.tsx",
+        "frontend/src/components/VideoRenderer.tsx",
+        "frontend/src/lib/videoUrl.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-enable-shareable-playback-via-url-encode-the-target-video-link-into-the-browser-url-query-param-or-route-segment-so-that-opening-a-shared-app-link-loads-the-same-video-automatically",
+      "featureTitle": "Enable shareable playback via URL: encode the target video link into the browser URL (query param or route segment) so that opening a shared app link loads the same video automatically.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/PlayerView.tsx",
+        "frontend/src/hooks/useShareVideoUrl.ts",
+        "frontend/src/lib/clipboard.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-coherent-visual-theme-colors-typography-spacing-and-component-styling-and-apply-it-consistently-across-the-landing-input-view-and-the-player-view-avoid-a-blue-purple-primary-palette",
+      "featureTitle": "Add a coherent visual theme (colors, typography, spacing, and component styling) and apply it consistently across the landing input view and the player view. Avoid a blue/purple primary palette.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/LayoutShell.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-generated-static-image-assets-and-use-them-in-the-ui-stored-under-frontend-public-assets-generated",
+      "featureTitle": "Add generated static image assets and use them in the UI (stored under frontend/public/assets/generated).",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/LandingHero.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

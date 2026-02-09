@@ -1,0 +1,121 @@
+{
+  "kind": "build_request",
+  "title": "Website to open and play shared video links",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a single-page UI where a user can paste a shared video link (URL) and open it in an in-page player.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "a website that open and plays shared video links"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A user can paste a URL into an input field and submit via button and Enter key.",
+        "After submit, the app navigates (or updates state) to show the player view with the provided URL visible/editable.",
+        "Invalid/empty input is blocked with a clear English error message."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Support playing common types of shared video links: (1) direct video file URLs (e.g., .mp4/.webm/.ogg) via an HTML5 <video> player, and (2) embeddable hosted video pages (e.g., YouTube/Vimeo-style links) via a safe iframe embed fallback.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "a website that open and plays shared video links"
+        ]
+      },
+      "acceptanceCriteria": [
+        "For direct video file URLs, the app renders an HTML5 video element with standard controls (play/pause/seek/volume/fullscreen).",
+        "For non-file URLs, the app renders an iframe embed view when possible; otherwise it shows an English message indicating the link cannot be embedded and provides a safe external-open link.",
+        "The app does not crash on unsupported URLs."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Enable shareable playback via URL: encode the target video link into the browser URL (query param or route segment) so that opening a shared app link loads the same video automatically.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "plays shared video links"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When a video is opened, the browser URL updates to include the video link value.",
+        "Visiting the app with a populated share URL loads directly into the player view for that video without additional user action.",
+        "A \"Copy share link\" control copies the current app URL to clipboard and shows an English confirmation state."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Add a coherent visual theme (colors, typography, spacing, and component styling) and apply it consistently across the landing input view and the player view. Avoid a blue/purple primary palette.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The app has a consistent, intentional look (not default browser styling) across all screens.",
+        "Primary palette is not blue/purple.",
+        "Spacing, typography, and buttons/inputs look consistent across the app."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Add generated static image assets and use them in the UI (stored under frontend/public/assets/generated).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All required images exist at frontend/public/assets/generated with the exact filenames specified.",
+        "The landing view uses the generated visuals (e.g., hero/background and icon) without routing image loading through the backend."
+      ]
+    }
+  ],
+  "constraints": [
+    "Use English for all user-facing text.",
+    "Do not modify files under frontend/src/components/ui or the immutable hook entrypoints listed in SYSTEM_CONTEXT (compose them instead if needed).",
+    "Do not add third-party authentication providers; only Internet Identity is allowed (not required for this app).",
+    "Backend must remain a single Motoko actor if any backend code is added (not required for this scope)."
+  ],
+  "nonGoals": [
+    "User accounts, playlists, likes, comments, or saved history across sessions.",
+    "Uploading or hosting video files inside the app.",
+    "Real-time sync/watch parties/chat.",
+    "Integrations with external video APIs requiring keys (e.g., YouTube Data API)."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Minimal play-button icon on transparent background (play-icon.dim_128x128.png)",
+      "Abstract video/film themed hero illustration with warm neutral palette (video-hero.dim_1600x900.png)"
+    ],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [
+      "Use English for user-facing text"
+    ],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

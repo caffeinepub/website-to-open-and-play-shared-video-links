@@ -1,0 +1,75 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-09T10:13:50.584Z",
+  "summary": "Implements a single-page landing + player flow with URL validation, direct-file HTML5 video playback, iframe embed fallback, shareable playback via a query param, and a warm non-blue/purple theme. However, the required generated image assets are not evidenced in the provided diff summary, and several unrequested authentication/actor-related hooks and backend scaffolding were added.",
+  "missing_requirements": [
+    {
+      "id": "REQ-5",
+      "requirement": "Add generated static image assets under frontend/public/assets/generated with exact filenames (play-icon.dim_128x128.png, video-hero.dim_1600x900.png) and use them in the UI.",
+      "reason": "UI references these assets, but the diff summary does not show the required files being added under frontend/public/assets/generated (two added files are omitted due to limits, so asset presence cannot be confirmed from the provided evidence).",
+      "evidence": [
+        "frontend/src/components/LandingHero.tsx",
+        "frontend/src/components/LayoutShell.tsx",
+        "File diff summary: \"Omitted files due to limits: added=2\""
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Added an (empty) Motoko backend actor even though no backend functionality is required for this scope.",
+      "reason": "BuildRequest is frontend-only for this scope and does not ask to add backend code.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Introduced Internet Identity authentication context/provider and actor/react-query plumbing.",
+      "reason": "Authentication is not required (only constrained if used), and user accounts are explicitly a non-goal; these additions are not requested by any REQ.",
+      "evidence": [
+        "frontend/src/main.tsx",
+        "frontend/src/hooks/useInternetIdentity.ts",
+        "frontend/src/hooks/useActor.ts"
+      ]
+    },
+    {
+      "description": "Added embedding support for additional platforms (Dailymotion, Twitch) beyond the examples given.",
+      "reason": "REQ-2 requires direct file URLs and a generic embeddable iframe fallback (examples: YouTube/Vimeo-style); adding specific extra platform handling is not requested.",
+      "evidence": [
+        "frontend/src/lib/videoUrl.ts"
+      ]
+    },
+    {
+      "description": "Added footer attribution/link to caffeine.ai.",
+      "reason": "Not requested by the BuildRequest requirements or acceptance criteria.",
+      "evidence": [
+        "frontend/src/components/LayoutShell.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.72,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/EmbedFallback.tsx",
+    "frontend/src/components/LandingHero.tsx",
+    "frontend/src/components/LayoutShell.tsx",
+    "frontend/src/components/PlayerView.tsx",
+    "frontend/src/components/VideoLinkForm.tsx",
+    "frontend/src/components/VideoRenderer.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useShareVideoUrl.ts",
+    "frontend/src/index.css",
+    "frontend/src/lib/clipboard.ts",
+    "frontend/src/lib/validation.ts",
+    "frontend/src/lib/videoUrl.ts",
+    "frontend/src/main.tsx",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

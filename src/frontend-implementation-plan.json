@@ -1,0 +1,161 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Single-page shared video link player",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Single-page landing UI to paste a video URL and open it in an in-page player with validation and editable URL.",
+      "acceptanceCriteria": [
+        "A user can paste a URL into an input field and submit via button and Enter key.",
+        "After submit, the app navigates (or updates state) to show the player view with the provided URL visible/editable.",
+        "Invalid/empty input is blocked with a clear English error message."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the SPA shell that toggles between a landing input view and a player view based on internal state or the shareable URL state; ensure all user-facing text is English."
+        },
+        {
+          "path": "frontend/src/components/VideoLinkForm.tsx",
+          "operation": "create",
+          "description": "Add a reusable URL input form component that supports submit via button and Enter key, performs empty/invalid URL validation, and renders clear English error messages; use shadcn-ui components (e.g., Button/Input/Card) to keep styling consistent. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/PlayerView.tsx",
+          "operation": "create",
+          "description": "Add the player view container that displays the currently selected URL as visible/editable (re-uses VideoLinkForm for editing) and hosts the actual player renderer; use shadcn-ui components for layout/controls consistency. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/VideoRenderer.tsx",
+          "operation": "create",
+          "description": "Create a renderer component that receives a validated URL and displays the appropriate player (HTML5 video or iframe fallback), and never throws on unexpected input."
+        },
+        {
+          "path": "frontend/src/lib/validation.ts",
+          "operation": "create",
+          "description": "Implement small pure helpers to validate/normalize URLs (trim, basic URL parsing, reject empty) and return English error strings for the UI to display."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Play direct video file URLs with HTML5 video, and fall back to a safe iframe embed (or an unembeddable message + external link) for hosted video pages.",
+      "acceptanceCriteria": [
+        "For direct video file URLs, the app renders an HTML5 video element with standard controls (play/pause/seek/volume/fullscreen).",
+        "For non-file URLs, the app renders an iframe embed view when possible; otherwise it shows an English message indicating the link cannot be embedded and provides a safe external-open link.",
+        "The app does not crash on unsupported URLs."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/VideoRenderer.tsx",
+          "operation": "modify",
+          "description": "Implement URL type detection: treat common file extensions (.mp4/.webm/.ogg) as direct video and render an HTML5 <video> with controls; otherwise attempt a safe iframe embed mapping for common hosted patterns (e.g., YouTube/Vimeo-style) and use a sandboxed iframe; if mapping is not possible, render an English “cannot be embedded” message and a safe external-open link (target=_blank with rel protections)."
+        },
+        {
+          "path": "frontend/src/lib/videoUrl.ts",
+          "operation": "create",
+          "description": "Add utilities to (1) detect direct video file URLs by extension, (2) attempt to derive an embeddable iframe URL for common hosted providers without requiring external APIs/keys, and (3) return a typed result the UI can handle gracefully."
+        },
+        {
+          "path": "frontend/src/components/EmbedFallback.tsx",
+          "operation": "create",
+          "description": "Create a small UI component to present iframe embed (when available) and the unembeddable fallback message + external link in consistent styling; use shadcn-ui components (e.g., Alert/Button) for consistent presentation. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Make playback shareable by encoding the current video link in the browser URL and providing a copy-share-link control.",
+      "acceptanceCriteria": [
+        "When a video is opened, the browser URL updates to include the video link value.",
+        "Visiting the app with a populated share URL loads directly into the player view for that video without additional user action.",
+        "A \"Copy share link\" control copies the current app URL to clipboard and shows an English confirmation state."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useShareVideoUrl.ts",
+          "operation": "create",
+          "description": "Create a hook that reads the video link from the browser URL (query param or route segment), decodes it safely, and provides setters that update window.history (push/replace) to keep the current selection shareable."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the share URL hook into the app so that (1) initial load with a share URL opens directly into the player view, and (2) submitting/editing a URL updates the browser URL accordingly without a full reload."
+        },
+        {
+          "path": "frontend/src/components/PlayerView.tsx",
+          "operation": "modify",
+          "description": "Add a \"Copy share link\" control that copies window.location.href via the Clipboard API and shows an English confirmation state (e.g., temporary label/state); use shadcn-ui components for the control and feedback (e.g., Button + Toast/Alert). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/lib/clipboard.ts",
+          "operation": "create",
+          "description": "Add a small helper to copy text to clipboard with a safe fallback and a boolean success result so the UI can show an English success/failure message."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Apply a consistent warm-neutral visual theme (non-blue/purple primary) across landing and player views with coherent typography, spacing, and component styling.",
+      "acceptanceCriteria": [
+        "The app has a consistent, intentional look (not default browser styling) across all screens.",
+        "Primary palette is not blue/purple.",
+        "Spacing, typography, and buttons/inputs look consistent across the app."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Add Tailwind base/components/utilities and define CSS variables used by the shadcn-ui theme (background/foreground/primary/etc.) using a warm neutral palette (avoid blue/purple primary); set consistent base typography and spacing defaults."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust theme extensions if needed to support the warm-neutral palette and consistent radii/shadows/typography; keep configuration aligned with shadcn-ui styling expectations. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/LayoutShell.tsx",
+          "operation": "create",
+          "description": "Create a simple layout wrapper for consistent page padding, max-width, background treatment, and header/footer area used by both the landing and player views; compose shadcn-ui primitives (e.g., Card) for consistent look. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap landing and player views in the shared LayoutShell so spacing/typography/buttons/inputs look consistent across the app."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Add the required generated static image assets under frontend/public/assets/generated and use them in the landing UI without backend routing.",
+      "acceptanceCriteria": [
+        "All required images exist at frontend/public/assets/generated with the exact filenames specified.",
+        "The landing view uses the generated visuals (e.g., hero/background and icon) without routing image loading through the backend."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/play-icon.dim_128x128.png",
+          "operation": "create",
+          "description": "Add the generated static asset: Minimal play-button icon on transparent background at the exact required path/filename."
+        },
+        {
+          "path": "frontend/public/assets/generated/video-hero.dim_1600x900.png",
+          "operation": "create",
+          "description": "Add the generated static asset: Abstract video/film themed hero illustration with warm neutral palette at the exact required path/filename."
+        },
+        {
+          "path": "frontend/src/components/LandingHero.tsx",
+          "operation": "create",
+          "description": "Create the landing hero section that visually incorporates frontend/public/assets/generated/video-hero.dim_1600x900.png and frontend/public/assets/generated/play-icon.dim_128x128.png as static assets and pairs them with the URL input form; use shadcn-ui components for consistent styling. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire LandingHero into the landing view so the generated images are used on the initial screen without any backend involvement."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "frontend/src/App.tsx": "Main application component that manages video URL state and toggles between landing hero and player view based on current URL.",
+  "frontend/src/components/LayoutShell.tsx": "Shared layout wrapper providing consistent header with branding, main content area, and footer with attribution across all views.",
+  "frontend/src/components/LandingHero.tsx": "Landing page hero section featuring generated hero image, play icon, heading, description, and video URL input form.",
+  "frontend/src/components/VideoLinkForm.tsx": "Reusable form component for video URL input with validation, error display, and submit handling via button or Enter key.",
+  "frontend/src/components/PlayerView.tsx": "Player view container displaying video renderer, URL editing controls, copy share link button, and video metadata.",
+  "frontend/src/components/VideoRenderer.tsx": "Video renderer that detects URL type and displays either HTML5 video player for direct files or iframe/fallback for hosted videos.",
+  "frontend/src/components/EmbedFallback.tsx": "Fallback component that displays iframe embed when possible or shows unembeddable message with external link button.",
+  "frontend/src/hooks/useShareVideoUrl.ts": "Custom hook managing video URL state synchronized with browser URL query parameters for shareable playback links.",
+  "frontend/src/lib/validation.ts": "URL validation utilities that check for empty input, valid URL format, and normalize URLs by adding protocol if missing.",
+  "frontend/src/lib/videoUrl.ts": "Video URL detection and transformation utilities supporting direct video files and embeddable platforms (YouTube, Vimeo, Dailymotion, Twitch).",
+  "frontend/src/lib/clipboard.ts": "Clipboard helper function with fallback support for copying text to clipboard across different browser environments.",
+  "frontend/src/index.css": "Global styles with warm terracotta/coral OKLCH color palette for light and dark modes, avoiding blue/purple primary colors.",
+  "frontend/tailwind.config.js": "Tailwind configuration extending theme with warm color tokens, custom shadows, and consistent border radius values."
+}
